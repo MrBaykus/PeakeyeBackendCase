@@ -1,0 +1,25 @@
+services:
+  peakeyebackendcase:
+    image: ${DOCKER_REGISTRY-}peakeyebackendcase
+    build:
+      context: .
+      dockerfile: PeakeyeBackendCase/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: PeakEyeDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+  
